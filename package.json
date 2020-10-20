@@ -1,42 +1,43 @@
 {
-  "name": "server",
-  "version": "1.0.0",
-  "main": "server.js",
-  "scripts": {
-    "start": "babel-node src/server",
-    "server": "nodemon --exec babel-node src/server",
-    "db:migrate:make": "env-cmd babel-node $(npm bin)/knex migrate:make --knexfile ./src/database/knexfile.js",
-    "db:migrate:dev": "env-cmd babel-node $(npm bin)/knex migrate:latest --knexfile ./src/database/knexfile.js",
-    "db:migrate:rollback:dev": "env-cmd babel-node $(npm bin)/knex migrate:rollback --knexfile ./src/database/knexfile.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "license": "MIT",
-  "dependencies": {
-    "@babel/core": "^7.12.3",
-    "@babel/node": "^7.12.1",
-    "@babel/plugin-proposal-class-properties": "^7.12.1",
-    "@babel/plugin-transform-regenerator": "^7.12.1",
-    "@babel/plugin-transform-runtime": "^7.12.1",
-    "@babel/preset-env": "^7.12.1",
-    "@babel/runtime": "^7.12.1",
-    "bcrypt": "^5.0.0",
-    "bcryptjs": "^2.4.3",
-    "config": "^3.3.2",
-    "cors": "^2.8.5",
-    "dotenv": "^8.2.0",
-    "env-cmd": "^10.1.0",
-    "express": "^4.17.1",
-    "express-validator": "^6.6.1",
-    "generate-unique-id": "^2.0.0",
-    "joi": "^17.2.1",
-    "jsonwebtoken": "^8.5.1",
-    "knex": "^0.21.6",
-    "knex-stringcase": "^1.4.3",
-    "moment": "^2.29.1",
-    "morgan": "^1.10.0",
-    "pg": "^8.4.1"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.5"
-  }
+	"name": "server",
+	"version": "1.0.0",
+	"main": "server.js",
+	"scripts": {
+		"start": "babel-node src/server",
+		"server": "nodemon --exec babel-node src/server",
+		"db:migrate:make": "env-cmd babel-node $(npm bin)/knex migrate:make --knexfile ./src/database/knexfile.js",
+		"db:migrate:dev": "env-cmd babel-node $(npm bin)/knex migrate:latest --knexfile ./src/database/knexfile.js",
+		"db:migrate": "babel-node $(npm bin)/knex migrate:latest --knexfile ./src/database/knexfile.js",
+		"db:migrate:rollback:dev": "env-cmd babel-node $(npm bin)/knex migrate:rollback --knexfile ./src/database/knexfile.js",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"license": "MIT",
+	"dependencies": {
+		"@babel/core": "^7.12.3",
+		"@babel/node": "^7.12.1",
+		"@babel/plugin-proposal-class-properties": "^7.12.1",
+		"@babel/plugin-transform-regenerator": "^7.12.1",
+		"@babel/plugin-transform-runtime": "^7.12.1",
+		"@babel/preset-env": "^7.12.1",
+		"@babel/runtime": "^7.12.1",
+		"bcrypt": "^5.0.0",
+		"bcryptjs": "^2.4.3",
+		"config": "^3.3.2",
+		"cors": "^2.8.5",
+		"dotenv": "^8.2.0",
+		"env-cmd": "^10.1.0",
+		"express": "^4.17.1",
+		"express-validator": "^6.6.1",
+		"generate-unique-id": "^2.0.0",
+		"joi": "^17.2.1",
+		"jsonwebtoken": "^8.5.1",
+		"knex": "^0.21.6",
+		"knex-stringcase": "^1.4.3",
+		"moment": "^2.29.1",
+		"morgan": "^1.10.0",
+		"pg": "^8.4.1"
+	},
+	"devDependencies": {
+		"nodemon": "^2.0.5"
+	}
 }
