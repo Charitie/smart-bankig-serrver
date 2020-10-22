@@ -32,7 +32,6 @@ export default function (req, res, next) {
 			}
 		});
 	} catch (err) {
-		console.log("token error", err.message);
 		throw new Error("Server Error");
 	}
 }

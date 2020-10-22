@@ -19,7 +19,6 @@ class AccountService {
 		const accountBalance = await accountResource.getAccountBalance(
 			userId
 		);
-		console.log(accountBalance)
 		return accountBalance;
 
 	}
@@ -75,7 +74,6 @@ class AccountService {
 	}
 
 	async transfer(userId, amountToTransfer, toAccountNumber) {
-		console.log(toAccountNumber, amountToTransfer);
 		const amount = parseFloat(amountToTransfer);
 		const {
 			accountNumber: fromAccount,

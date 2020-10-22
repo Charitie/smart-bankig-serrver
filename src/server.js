@@ -17,9 +17,4 @@ app.use("/accounts", getAccountRouter());
 
 app.get("/", (req, res) => res.send("Api running"));
 
-// app.use((error, req, res, next) => { 
-//   console.log(error)
-//   next(error)
-// })
-
 app.listen(port, () => console.log(`Server running on port ${port}`));

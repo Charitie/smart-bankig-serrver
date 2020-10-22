@@ -46,7 +46,6 @@ export function getAccountRouter() {
 
 	accountRouter.get("/balance", auth, async (req, res) => {
 		const userId = req.user.id;
-		console.log(req.user);
 
 		try {
 			const balance = await accountService.getAccountBalance(userId);
