@@ -1,5 +1,6 @@
 import generateUniqueId from "generate-unique-id";
 import { accountResource } from "./account.resource";
+import CustomError from "../lib/util/customError";
 
 class AccountService {
 	async createAccount(userId, balance = 0) {
@@ -16,11 +17,8 @@ class AccountService {
 	}
 
 	async getAccountBalance(userId) {
-		const accountBalance = await accountResource.getAccountBalance(
-			userId
-		);
+		const accountBalance = await accountResource.getAccountBalance(userId);
 		return accountBalance;
-
 	}
 
 	async deposit(userId, amountToDeposit) {
@@ -36,6 +34,14 @@ class AccountService {
 			amount,
 			transactionType,
 		});
+
+		if (!amount) {
+			throw new CustomError(422, "Please enter amount more than 0");
+		}
+
+		if (amount <= 0) {
+			throw new CustomError(422, "Please enter amount more than 0");
+		}
 
 		const newBalance = balance + amount;
 		await accountResource.updateBalance(accountNumber, newBalance);
@@ -60,8 +66,16 @@ class AccountService {
 			transactionType,
 		});
 
+		if (!amount) {
+			throw new CustomError(422, "Please enter amount more than 0");
+		}
+
 		if (balance < amount) {
-			throw new Error("Insufficient fund");
+			throw new CustomError(422, "Insufficient fund");
+		}
+
+		if (amount <= 0) {
+			throw new CustomError(422, "Please enter amount more than 0");
 		}
 
 		const newBalance = balance - amount;
@@ -84,9 +98,9 @@ class AccountService {
 			"accountNumber",
 			toAccountNumber
 		);
-
+		
 		if (!toAccount) {
-			throw new Error("Invalid account number");
+			throw new CustomError(400, "Invalid account number");
 		}
 
 		const { balance: toBalance } = toAccount;
@@ -99,8 +113,16 @@ class AccountService {
 			transactionType,
 		});
 
+		if (!amount) {
+			throw new CustomError(422, "Please enter amount more than 0");
+		}
+
 		if (fromBalance < amount) {
-			throw new Error("Insufficient fund");
+			throw new CustomError(422, "Insufficient fund");
+		}
+
+		if (amount <= 0) {
+			throw new CustomError(422, "Please Enter amount more than 0");
 		}
 
 		const fromAccountBalance = fromBalance - amount;
@@ -112,7 +134,7 @@ class AccountService {
 		return {
 			balance: fromAccountBalance,
 			amountTransfered: amount,
-			accountNumber: fromAccount,
+			accountNumber: toAccountNumber,
 		};
 	}
 }
