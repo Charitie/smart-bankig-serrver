@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken";
 import { getConfig } from "../../config/index";
+import CustomError from '../util/customError';
 
 const config = getConfig();
 
@@ -20,18 +21,18 @@ export default function (req, res, next) {
 	const token = extractTokenFromAuthHeaders(req);
 
 	//Check if not token
-	if (!token) throw new Error("No token, authorization denied");
+	if (!token) throw new CustomError(401, "No token, authorization denied");
 
 	try {
 		jwt.verify(token, config.secretKey, (error, decoded) => {
 			if (error) {
-				throw new Error("Token is not valid");
+				throw new CustomError(422, "Token is not valid");
 			} else {
         req.user = { id: decoded.id };
 				next();
 			}
 		});
 	} catch (err) {
-		throw new Error("Server Error");
+		throw new CustomError(500, "Server Error");
 	}
 }
