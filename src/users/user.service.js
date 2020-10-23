@@ -3,6 +3,7 @@ import EncryptData from "../lib/helpers/encryptData";
 import createToken from "../lib/helpers/jwtHelpers";
 import { getConfig } from "../config/index";
 import { accountService } from '../accounts/account.service';
+import CustomError from '../lib/util/customError';
 
 const config = getConfig();
 
@@ -13,7 +14,7 @@ class UserService {
 
 		//check if email already exist
 		if (existingUser) {
-			throw new Error("Email already exists");
+			throw new CustomError(401, "Email already exists");
 		}
 
 		//hash password
@@ -46,13 +47,13 @@ class UserService {
 		//check if user exist
 		const existingUser = await userResource.getUser("email", email);
 		if (!existingUser) {
-			throw new Error("Invalid credentials" );
+			throw new CustomError(400, "Invalid credentials" );
     }
 
 		//compare passwords
     const passwordMatch = await EncryptData.compareHash(password, existingUser.password);
 		if (!passwordMatch) {
-			throw new Error("Invalid credentials");
+			throw new CustomError(400, "Invalid credentials");
 		}
 
 		//create token
