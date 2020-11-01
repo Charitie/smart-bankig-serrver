@@ -1,3 +1,3 @@
 web: npm run db:migrate
 
-web: npm run start
+web: npm run start:prod
