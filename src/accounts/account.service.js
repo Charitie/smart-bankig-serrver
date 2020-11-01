@@ -137,6 +137,10 @@ class AccountService {
 			accountNumber: toAccountNumber,
 		};
 	}
+
+	async getAccount(lookupKey, value) {
+		return accountResource.getAccount(lookupKey, value)
+	}
 }
 
 export const accountService = new AccountService();

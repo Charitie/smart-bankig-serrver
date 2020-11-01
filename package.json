@@ -3,7 +3,9 @@
 	"version": "1.0.0",
 	"main": "server.js",
 	"scripts": {
-		"start": "babel-node src/server",
+		"start:dev": "babel-node src/server",
+		"start:prod": "node build/server.js",
+		"build": "babel ./src/ -d build/",
 		"server": "nodemon --exec babel-node src/server",
 		"db:migrate:make": "env-cmd babel-node $(npm bin)/knex migrate:make --knexfile ./src/database/knexfile.js",
 		"db:migrate:dev": "env-cmd babel-node $(npm bin)/knex migrate:latest --knexfile ./src/database/knexfile.js",
@@ -13,6 +15,7 @@
 	},
 	"license": "MIT",
 	"dependencies": {
+		"@babel/cli": "^7.12.1",
 		"@babel/core": "^7.12.3",
 		"@babel/node": "^7.12.1",
 		"@babel/plugin-proposal-class-properties": "^7.12.1",
